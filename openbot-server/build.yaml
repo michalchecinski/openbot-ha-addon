@@ -1,3 +1,0 @@
-args:
-  # Pin to a release (e.g. 0.30.0) to control upgrades; OpenBot never downgrades.
-  OPENBOT_VERSION: latest

@@ -1,5 +1,5 @@
 name: OpenBot Server (Unofficial)
-version: "0.1.0"
+version: "0.1.1"
 slug: openbot
 description: Unofficial community add-on running the OpenBot headless server. Not affiliated with Synthetify Labs.
 url: https://github.com/michalchecinski/openbot-ha-addon
@@ -21,6 +21,7 @@ apparmor: false
 # (OPENBOT_SETUP_PAGE_PORT, set in run.sh). Needs an OpenBot release > 0.71.0.
 ingress: true
 ingress_port: 8080
+ingress_panel: true
 panel_icon: mdi:robot
 panel_title: OpenBot
 options:

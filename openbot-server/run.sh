@@ -13,8 +13,9 @@ if [ "$(stat -c %u /data)" != "1000" ]; then
   find /data -mindepth 1 -maxdepth 1 ! -name options.json -exec chown -R 1000:1000 {} +
 fi
 
-# Browser sign-in page, reached through Home Assistant ingress only (no published port).
-export OPENBOT_SETUP_PAGE_PORT=8080
+# Browser sign-in page: OpenBot serves it on 8081, nginx proxies it on 8080
+# for Home Assistant ingress and rewrites the page's absolute /api paths.
+export OPENBOT_SETUP_PAGE_PORT=8081
 export OPENBOT_DISPLAY_SIZE
 OPENBOT_DISPLAY_SIZE="$(jq -r '.display_size' "$OPTIONS")"
 
@@ -22,6 +23,9 @@ OPENBOT_DISPLAY_SIZE="$(jq -r '.display_size' "$OPTIONS")"
 while IFS=$'\t' read -r name value; do
   [ -n "$name" ] && export "$name=$value"
 done < <(jq -r '.env_vars[]? | [.name, .value] | @tsv' "$OPTIONS")
+
+# nginx (daemonizes) proxies 8080 -> 8081 and rewrites /api paths for ingress.
+nginx -c /etc/nginx/openbot-nginx.conf
 
 echo "[openbot-addon] Starting OpenBot server"
 # Keep HOME pointed at /data after dropping to UID 1000, which cannot write to /root.
