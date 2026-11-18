@@ -24,6 +24,8 @@ while IFS=$'\t' read -r name value; do
 done < <(jq -r '.env_vars[]? | [.name, .value] | @tsv' "$OPTIONS")
 
 echo "[openbot-addon] Starting OpenBot server"
+# Keep HOME pointed at /data after dropping to UID 1000, which cannot write to /root.
+export HOME=/data USER=openbot LOGNAME=openbot
 exec setpriv --reuid=1000 --regid=1000 --init-groups \
   --inh-caps=+sys_admin --ambient-caps=+sys_admin \
   /usr/bin/tini -- /opt/OpenBot/app/resources/hosting/openbot-container
