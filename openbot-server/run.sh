@@ -16,8 +16,6 @@ fi
 # Browser sign-in page: OpenBot serves it on 8081, nginx proxies it on 8080
 # for Home Assistant ingress and rewrites the page's absolute /api paths.
 export OPENBOT_SETUP_PAGE_PORT=8081
-export OPENBOT_DISPLAY_SIZE
-OPENBOT_DISPLAY_SIZE="$(jq -r '.display_size' "$OPTIONS")"
 
 # Extra environment variables from the add-on options (e.g. provider API keys).
 while IFS=$'\t' read -r name value; do

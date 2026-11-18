@@ -31,9 +31,9 @@ Never share the claim: anyone who has it can sign in to your server.
 
 ## Options
 
-- `display_size`: virtual display for agents, `WIDTHxHEIGHT`.
 - `env_vars`: extra environment variables (provider API keys such as
-  `XAI_API_KEY`). Agents inherit them.
+  `XAI_API_KEY`, or `OPENBOT_DISPLAY_SIZE` in `WIDTHxHEIGHT` format — default
+  `1280x800` — if a different agent display size is needed). Agents inherit them.
 
 ## Security
 
