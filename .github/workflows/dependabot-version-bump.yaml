@@ -1,0 +1,49 @@
+# This workflow uses pull_request_target to get a write token for Dependabot
+# pull requests. It is limited to the dependabot[bot] actor, runs the bump
+# script from the trusted base checkout (not from the PR branch), and a push
+# made with GITHUB_TOKEN does not retrigger workflows.
+name: Bump add-on version for Dependabot
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+    paths:
+      - 'openbot-server/Dockerfile'
+
+permissions:
+  contents: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-24.04
+    if: github.actor == 'dependabot[bot]'
+    steps:
+      - name: Checkout trusted base
+        uses: actions/checkout@v4
+        with:
+          path: trusted
+
+      - name: Checkout Dependabot PR branch
+        uses: actions/checkout@v4
+        with:
+          path: pr
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          fetch-depth: 0
+
+      - name: Bump add-on version
+        working-directory: pr
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: bash "$GITHUB_WORKSPACE/trusted/.github/scripts/bump-addon-version.sh"
+
+      - name: Commit and push version bump
+        working-directory: pr
+        run: |
+          if ! git diff --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add openbot-server/config.yaml openbot-server/CHANGELOG.md
+            git commit -m "Bump add-on version for OpenBot update"
+            git push
+          fi

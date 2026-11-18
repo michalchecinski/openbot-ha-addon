@@ -1,5 +1,5 @@
-ARG OPENBOT_VERSION=latest
-FROM ghcr.io/nightly-labs/openbot:${OPENBOT_VERSION}
+# Pinned on purpose. Dependabot opens a PR when OpenBot publishes a newer tag.
+FROM ghcr.io/nightly-labs/openbot:0.73.0
 
 # The upstream image runs as UID 1000, but Home Assistant mounts /data as root.
 # Start as root, fix ownership, then drop to the openbot user in run.sh.
