@@ -1,0 +1,33 @@
+name: OpenBot Server (Unofficial)
+version: "0.1.0"
+slug: openbot
+description: Unofficial community add-on running the OpenBot headless server. Not affiliated with Synthetify Labs.
+url: https://github.com/CHANGEME/openbot-ha-addon
+arch:
+  - amd64
+  - aarch64
+init: false
+startup: services
+boot: auto
+# OpenBot stops its agents and closes its database on SIGTERM.
+timeout: 60
+# Electron's sandbox needs user namespaces, which Docker's default seccomp
+# profile only allows with CAP_SYS_ADMIN. Upstream ships a custom seccomp
+# profile instead, which the Supervisor cannot apply.
+privileged:
+  - SYS_ADMIN
+apparmor: false
+# Sign-in happens in the HA UI: ingress proxies OpenBot's setup page
+# (OPENBOT_SETUP_PAGE_PORT, set in run.sh). Needs an OpenBot release > 0.71.0.
+ingress: true
+ingress_port: 8080
+panel_icon: mdi:robot
+panel_title: OpenBot
+options:
+  display_size: 1280x800
+  env_vars: []
+schema:
+  display_size: match(^[0-9]{3,4}x[0-9]{3,4}$)
+  env_vars:
+    - name: match(^[A-Z][A-Z0-9_]*$)
+      value: password

@@ -1,0 +1,16 @@
+MIT License
+
+Copyright (c) 2026 Michal
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of the add-on wrapper files in this repository (the Home Assistant add-on
+configuration, Dockerfile and scripts), to deal in them without restriction,
+including without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies, subject to the following condition:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of them.
+
+THEY ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
+
+This license does NOT cover OpenBot itself. See NOTICE.
