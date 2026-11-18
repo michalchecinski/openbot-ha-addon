@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+- Show claim and server_name in the Configuration tab (empty defaults).
+
 ## 0.1.2
 
 - Optional one-time claim sign-in (`claim`, `server_name` options).
