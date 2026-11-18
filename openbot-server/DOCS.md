@@ -16,6 +16,19 @@ pairing code, use a terminal with Docker access:
 `docker exec -it addon_<repo-hash>_openbot openbot logout` or
 `openbot mobile-connect`.
 
+## Sign in with a one-time claim (optional)
+
+If you prefer, you can sign the server in from the OpenBot app instead of the
+setup page. In OpenBot choose **Add server > Other options > New server on
+another computer**. OpenBot shows a command containing `OPENBOT_CLAIM=...`;
+copy only the value after `OPENBOT_CLAIM=`. Paste it into the add-on option
+`claim` (you can optionally set `server_name` to name this server). Start or
+restart the add-on within 15 minutes — a claim works once and expires after 15
+minutes. Clear the `claim` option afterwards. The add-on log shows the result
+of the sign-in attempt. A server that is already signed in ignores the claim.
+
+Never share the claim: anyone who has it can sign in to your server.
+
 ## Options
 
 - `display_size`: virtual display for agents, `WIDTHxHEIGHT`.

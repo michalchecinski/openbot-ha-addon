@@ -1,5 +1,5 @@
 name: OpenBot Server (Unofficial)
-version: "0.1.1"
+version: "0.1.2"
 slug: openbot
 description: Unofficial community add-on running the OpenBot headless server. Not affiliated with Synthetify Labs.
 url: https://github.com/michalchecinski/openbot-ha-addon
@@ -29,6 +29,8 @@ options:
   env_vars: []
 schema:
   display_size: match(^[0-9]{3,4}x[0-9]{3,4}$)
+  claim: password?
+  server_name: str?
   env_vars:
     - name: match(^[A-Z][A-Z0-9_]*$)
       value: password
