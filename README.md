@@ -22,7 +22,7 @@ Assistant.
 You need a Home Assistant installation with the **Apps** store and an `amd64`
 or `aarch64` host. Home Assistant Container does not support apps.
 
-[![Add repository to Home Assistant](https://my.home-assistant.io/badges/supervisor_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fmichalchecinski%2Fopenbot-ha-addon)
+[![Add repository to Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fmichalchecinski%2Fopenbot-ha-addon)
 
 Or add the repository manually:
 
