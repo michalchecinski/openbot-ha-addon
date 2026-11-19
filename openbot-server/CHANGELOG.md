@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.5
+
+- Add the OpenBot icon to the add-on card.
+
 ## 0.1.4
 
 - Remove the display_size option (OpenBot defaults to 1280x800; OPENBOT_DISPLAY_SIZE can still be set via env_vars).
