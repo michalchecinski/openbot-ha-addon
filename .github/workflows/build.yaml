@@ -1,9 +1,4 @@
 # Build the Home Assistant add-on image for openbot-server/ and push it to GHCR.
-#
-# NOTE: these images are not used by Home Assistant until the line
-#   image: ghcr.io/<owner>/openbot-ha-addon-{arch}
-# is added to openbot-server/config.yaml. The GHCR packages must be made public
-# before that, otherwise Home Assistant cannot pull them.
 
 name: Build add-on images
 
