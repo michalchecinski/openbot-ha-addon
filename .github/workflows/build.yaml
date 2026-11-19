@@ -14,6 +14,23 @@ on:
       - 'openbot-server/**'
       - '.github/workflows/build.yaml'
   workflow_dispatch:
+    inputs:
+      publish:
+        description: Push the images to GHCR
+        type: boolean
+        default: true
+  # Used by the "Update OpenBot" workflow: build a branch without publishing,
+  # then publish from main after the merge.
+  workflow_call:
+    inputs:
+      ref:
+        description: Git ref to build (default is the caller's ref)
+        type: string
+        default: ''
+      publish:
+        description: Push the images to GHCR
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -31,8 +48,14 @@ jobs:
             platform: linux/arm64
             runner: ubuntu-24.04-arm
     runs-on: ${{ matrix.runner }}
+    env:
+      # Pull requests only build. Pushes to main publish, and so do manual and
+      # reusable-workflow runs that ask for it.
+      PUBLISH: ${{ github.event_name == 'push' || inputs.publish }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          ref: ${{ inputs.ref }}
 
       - name: Read version and image name
         id: meta
@@ -51,7 +74,7 @@ jobs:
       - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3.12.0
 
       - name: Log in to GHCR
-        if: github.event_name != 'pull_request'
+        if: env.PUBLISH == 'true'
         uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3.7.0
         with:
           registry: ghcr.io
@@ -62,7 +85,7 @@ jobs:
         with:
           context: openbot-server
           platforms: ${{ matrix.platform }}
-          push: ${{ github.event_name != 'pull_request' }}
+          push: ${{ env.PUBLISH == 'true' }}
           tags: |
             ${{ steps.meta.outputs.image }}:${{ steps.meta.outputs.version }}
             ${{ steps.meta.outputs.image }}:latest
