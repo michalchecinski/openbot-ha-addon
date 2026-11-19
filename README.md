@@ -54,7 +54,8 @@ On older Home Assistant versions, **Apps** and **Install app** are labeled
 - Connect from an OpenBot client to use the server; the ingress page is for
   setup and status.
 - Keep OpenBot's home directory in the app's persistent `/data` volume.
-- Optionally sign in using a one-time claim and set a server name.
+- Sign in through the web UI, or with a one-time claim set in the app options
+  (with an optional server name).
 - Pass provider API keys and other environment variables through app options.
 
 See the [full documentation](openbot-server/DOCS.md) for configuration examples,

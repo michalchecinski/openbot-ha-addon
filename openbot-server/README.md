@@ -10,11 +10,12 @@ that can run commands and use a browser.
 ## About
 
 The app provides a sign-in and server-status page through Home Assistant
-ingress. Open it from the sidebar or **Open Web UI**, sign in with your email,
-then select the server in an OpenBot client using the same account.
+ingress. Sign in there with your email from the sidebar or **Open Web UI**, or
+set a one-time claim in the app options, then select the server in an OpenBot
+client using the same account.
 
 OpenBot's home directory is stored in the app's persistent `/data` volume.
-Optional configuration supports one-time claim sign-in, a server name for that
+Optional configuration supports a one-time claim, a server name for that
 claim, and environment variables such as provider API keys.
 
 Supported architectures are `amd64` and `aarch64`. The app requires
