@@ -90,10 +90,7 @@ a system holding data you cannot afford to lose.
 
 ## Known issues
 
-- Untested on real Home Assistant so far.
-- The ingress proxy rewrites the setup page's API paths, but sign-in through
-  ingress has not been validated on real Home Assistant. If email sign-in
-  fails, try the one-time claim method above.
+- If email sign-in through ingress fails, try the one-time claim method above.
 - Upstream asks for `--shm-size 1g`; the Supervisor offers no such setting.
 - Memory use on small hardware (Raspberry Pi) may be a problem.
 

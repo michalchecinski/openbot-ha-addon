@@ -12,10 +12,7 @@ This is an unofficial community app repository, not affiliated with, endorsed
 by, or supported by Synthetify Labs. Apps were formerly called add-ons in Home
 Assistant.
 
-> **Status:** This app has not yet been tested on a real Home Assistant
-> installation. The architectures above are configured build targets, not a
-> claim of hardware validation. Read the [security notes](#security) before
-> installing.
+> **Note:** Read the [security notes](#security) before installing.
 
 ## Installation
 
