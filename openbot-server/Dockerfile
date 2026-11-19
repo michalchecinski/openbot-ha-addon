@@ -1,6 +1,6 @@
 # Pinned on purpose. The "Update OpenBot" workflow opens a PR within minutes of a
 # new OpenBot release; Dependabot is the daily fallback.
-FROM ghcr.io/nightly-labs/openbot:0.73.0
+FROM ghcr.io/nightly-labs/openbot:0.74.0
 
 # The upstream image runs as UID 1000, but Home Assistant mounts /data as root.
 # Start as root, fix ownership, then drop to the openbot user in run.sh.
