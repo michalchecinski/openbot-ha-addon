@@ -17,10 +17,9 @@ OpenBot's home directory is stored in the app's persistent `/data` volume.
 Optional configuration supports one-time claim sign-in, a server name for that
 claim, and environment variables such as provider API keys.
 
-**Untested on real Home Assistant hardware.** `amd64` and `aarch64` are the
-configured build targets. The app requires `SYS_ADMIN` and disables AppArmor;
-agents act without per-action confirmation. Read the security notes before
-installing.
+Supported architectures are `amd64` and `aarch64`. The app requires
+`SYS_ADMIN` and disables AppArmor; agents act without per-action confirmation.
+Read the security notes before installing.
 
 [Installation, configuration, and security notes](DOCS.md) ·
 [Changelog](CHANGELOG.md) ·
