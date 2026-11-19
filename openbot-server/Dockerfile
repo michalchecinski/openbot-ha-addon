@@ -10,4 +10,5 @@ RUN apt-get update \
 COPY run.sh /run.sh
 RUN chmod 0755 /run.sh
 COPY nginx.conf /etc/nginx/openbot-nginx.conf
+COPY NOTICE /usr/share/doc/openbot-addon/NOTICE
 ENTRYPOINT ["/run.sh"]
