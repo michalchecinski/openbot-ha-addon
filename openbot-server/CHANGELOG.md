@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.7
+
+- Update OpenBot to 0.76.1.
+
 ## 0.1.6
 
 - Add the OpenBot icon to the add-on card.
