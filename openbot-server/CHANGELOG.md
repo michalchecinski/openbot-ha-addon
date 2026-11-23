@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.8
+
+- Update OpenBot to 0.77.0.
+
 ## 0.1.7
 
 - Update OpenBot to 0.76.1.
