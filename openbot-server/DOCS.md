@@ -68,6 +68,33 @@ OpenBot runs with `/data` as its home directory. This app volume persists
 across restarts and updates. Include the app in your Home Assistant backups
 before updating or removing it if you need to preserve its data.
 
+Home Assistant stops the app while it backs it up and then starts it again, so the
+databases are copied safely. Running agent turns are interrupted, so schedule
+backups for a quiet time.
+
+To keep backups small, they leave out files that OpenBot can download or make
+again: caches, the provider CLIs (such as Codex and Claude Code), local voice
+models and `node_modules` folders in agent workspaces. Conversations, agents, the
+other workspace files and provider sign-ins are in the backup.
+
+After a restore, download the CLI of each provider you use again in OpenBot's
+provider settings, and the voice model if you use one. Agents and routines of a
+provider do not run until its CLI is downloaded.
+
+In a project that needs `node_modules`, run its install command (for example
+`npm ci`) or ask the agent to do it. Edits made inside `node_modules` are lost.
+Folders more than eight levels below `/data/OpenBot` are still backed up.
+
+If backups are still large, the rest is mostly agent workspaces
+(`/data/OpenBot`) and conversations. **Server settings > Storage** in OpenBot shows
+sizes. Backups made before 0.1.10 keep their size.
+
+OpenBot can also export a server itself: **Server settings > Transfer**, then
+**Everything**. The file moves agents, chat history and workspace files to another
+server. It does not replace a Home Assistant backup: it has no API keys, sign-ins,
+shared tables, `.git` folders or `.env` files, and an import makes new agents with new
+IDs.
+
 ## Security
 
 Agents run commands and control a browser without per-action confirmation.
