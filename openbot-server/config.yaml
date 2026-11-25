@@ -1,5 +1,5 @@
 name: OpenBot Server (Unofficial)
-version: "0.1.9"
+version: "0.1.10"
 slug: openbot
 image: ghcr.io/michalchecinski/openbot-ha-addon-{arch}
 description: Unofficial community add-on running the OpenBot headless server. Not affiliated with Synthetify Labs.
@@ -12,6 +12,49 @@ startup: services
 boot: auto
 # OpenBot stops its agents and closes its database on SIGTERM.
 timeout: 60
+# Stop OpenBot during a backup, as upstream's openbot-instance backup does, so its
+# databases are closed while they are copied.
+backup: cold
+# Keep downloads and caches out of Home Assistant backups. The list follows
+# upstream's scripts/hosting/move-from-boat.sh, which also keeps bun: the
+# npm commands of agents depend on it. Supervisor matches each pattern against the
+# full path (.../<repository>_openbot/...), so patterns start with *_openbot to
+# match only these folders, not folders of the same name in agent workspaces.
+backup_exclude:
+  - "*_openbot/.cache"
+  - "*_openbot/.npm/_cacache"
+  - "*_openbot/.npm/_npx"
+  - "*_openbot/.config/OpenBot/Cache"
+  - "*_openbot/.config/OpenBot/Code Cache"
+  - "*_openbot/.config/OpenBot/Partitions/*/Cache"
+  - "*_openbot/.config/OpenBot/Partitions/*/Code Cache"
+  # Voice models and yt-dlp, not in upstream's list.
+  - "*_openbot/.config/OpenBot/runtimes"
+  # Provider CLIs, up to two versions each.
+  - "*_openbot/.config/OpenBot/provider-runtimes/.downloads"
+  - "*_openbot/.config/OpenBot/provider-runtimes/codex"
+  - "*_openbot/.config/OpenBot/provider-runtimes/claude"
+  - "*_openbot/.config/OpenBot/provider-runtimes/grok"
+  - "*_openbot/.config/OpenBot/provider-runtimes/opencode"
+  - "*_openbot/.config/OpenBot/provider-runtimes/antigravity"
+  - "*_openbot/.config/OpenBot/provider-runtimes/cursor"
+  - "*_openbot/.config/OpenBot/provider-runtimes/cline"
+  - "*_openbot/.config/OpenBot/provider-runtimes/kimi"
+  - "*_openbot/.config/OpenBot/provider-runtimes/devin"
+  - "*_openbot/.config/OpenBot/provider-runtimes/copilot"
+  - "*_openbot/.config/OpenBot/provider-runtimes/mistral"
+  - "*_openbot/.config/OpenBot/provider-runtimes/pi"
+  - "*_openbot/.config/OpenBot/provider-runtimes/muse"
+  # node_modules in agent workspaces only. Elsewhere it holds installed tools that
+  # nothing reinstalls. Supervisor's patterns have no recursive **, so list depths.
+  - "*_openbot/OpenBot/*/node_modules"
+  - "*_openbot/OpenBot/*/*/node_modules"
+  - "*_openbot/OpenBot/*/*/*/node_modules"
+  - "*_openbot/OpenBot/*/*/*/*/node_modules"
+  - "*_openbot/OpenBot/*/*/*/*/*/node_modules"
+  - "*_openbot/OpenBot/*/*/*/*/*/*/node_modules"
+  - "*_openbot/OpenBot/*/*/*/*/*/*/*/node_modules"
+  - "*_openbot/OpenBot/*/*/*/*/*/*/*/*/node_modules"
 # Electron's sandbox needs user namespaces, which Docker's default seccomp
 # profile only allows with CAP_SYS_ADMIN. Upstream ships a custom seccomp
 # profile instead, which the Supervisor cannot apply.

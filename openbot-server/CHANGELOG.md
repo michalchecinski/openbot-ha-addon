@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.10
+
+- Exclude caches, provider CLIs and voice models from Home Assistant backups.
+  After a restore, download the provider CLIs again in OpenBot.
+- Exclude `node_modules` in agent workspaces from backups. After a restore, install
+  the packages of those projects again.
+- Stop OpenBot while Home Assistant backs it up, so that its database is copied
+  safely. It starts again after the backup; running agent turns are interrupted.
+
 ## 0.1.9
 
 - Update OpenBot to 0.78.0.
