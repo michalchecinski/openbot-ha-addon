@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.11
+
+- Update OpenBot to v0.79.0.
+
 ## 0.1.10
 
 - Exclude caches, provider CLIs and voice models from Home Assistant backups.
