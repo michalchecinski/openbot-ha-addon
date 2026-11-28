@@ -1,5 +1,5 @@
 name: OpenBot Server (Unofficial)
-version: "0.1.11"
+version: "0.1.12"
 slug: openbot
 image: ghcr.io/michalchecinski/openbot-ha-addon-{arch}
 description: Unofficial community add-on running the OpenBot headless server. Not affiliated with Synthetify Labs.
